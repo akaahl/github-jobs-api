@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <title>GitHub Jobs API</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <img src="assets/desktop/logo.svg" alt="logo" />
+        <div class="mode-container">
+          <img
+            src="assets/desktop/icon-sun.svg"
+            alt="sun-icon"
+            class="mode-btn light"
+          />
+          <input
+            type="checkbox"
+            name="light-dark"
+            class="light-dark-checkbox"
+          />
+          <img
+            src="assets/desktop/icon-moon.svg"
+            alt="moon-icon"
+            class="mode-btn dark"
+          />
+        </div>
+      </div>
+
+      <form>
+        <div class="filter-one">
+          <img src="assets/desktop/icon-glass.svg" alt="glass icon" />
+          <input
+            type="text"
+            placeholder="Filter by title, companies, expertise..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="filter-two">
+          <img src="assets/desktop/icon-location.svg" alt="location icon" />
+          <input
+            type="text"
+            placeholder="Filter by location..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="filter-three">
+          <input type="checkbox" name="fulltime-filter" />
+          <label for="fulltime-filter">Full Time Only</label>
+        </div>
+        <button>Search</button>
+      </form>
+    </header>
+  </body>
+</html>

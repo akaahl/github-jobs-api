@@ -1,0 +1,265 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  background: #f3f4ed;
+  font-family: "Ubuntu", sans-serif;
+}
+
+body header {
+  width: 100%;
+  height: 10rem;
+  position: relative;
+  background: url(assets/desktop/bg-pattern-header.svg);
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body header .header-container {
+  margin-top: 3rem;
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+body header .header-container .mode-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+body header .header-container .mode-container img,
+body header .header-container .mode-container input {
+  margin: 0 5px;
+}
+
+body header .header-container .mode-container img {
+  cursor: pointer;
+}
+
+body header .header-container .mode-container input {
+  position: relative;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 1.2rem;
+  width: 3rem;
+  background: #fff;
+  border: none;
+  border-radius: 4rem;
+}
+
+body header .header-container .mode-container input::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background-color: #5964e0;
+}
+
+body header form {
+  position: absolute;
+  bottom: -2rem;
+  height: 4rem;
+  border-radius: 5px;
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #fff;
+  -webkit-box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1);
+          box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1);
+}
+
+body header form .filter-one {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40%;
+  padding-left: 2rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body header form .filter-one input[type="text"] {
+  width: 70%;
+  margin-left: 1rem;
+  border: none;
+  outline: none;
+  padding: 10px 5px;
+}
+
+body header form .filter-one input[type="text"]::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+
+body header form .filter-one input[type="text"]:-ms-input-placeholder {
+  opacity: 0.5;
+}
+
+body header form .filter-one input[type="text"]::-ms-input-placeholder {
+  opacity: 0.5;
+}
+
+body header form .filter-one input[type="text"]::placeholder {
+  opacity: 0.5;
+}
+
+body header form .filter-two {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 25%;
+  padding-left: 2rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body header form .filter-two input[type="text"] {
+  width: 70%;
+  margin-left: 1rem;
+  border: none;
+  outline: none;
+  padding: 10px 5px;
+}
+
+body header form .filter-two input[type="text"]::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+
+body header form .filter-two input[type="text"]:-ms-input-placeholder {
+  opacity: 0.5;
+}
+
+body header form .filter-two input[type="text"]::-ms-input-placeholder {
+  opacity: 0.5;
+}
+
+body header form .filter-two input[type="text"]::placeholder {
+  opacity: 0.5;
+}
+
+body header form .filter-three {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  height: 100%;
+  width: 20%;
+  padding-left: 2rem;
+}
+
+body header form .filter-three input[type="checkbox"] {
+  position: relative;
+  background: #9daec2;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: all 0s linear;
+  transition: all 0s linear;
+}
+
+body header form .filter-three input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) scale(4);
+          transform: translate(-50%, -50%) scale(4);
+  background-image: url(assets/desktop/icon-check.svg);
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 15px;
+  width: 15px;
+  visibility: hidden;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+body header form .filter-three input[type="checkbox"]:checked {
+  background: #5964e0;
+}
+
+body header form .filter-three input[type="checkbox"]:checked::after {
+  visibility: visible;
+  -webkit-transform: translate(-50%, -50%) scale(1);
+          transform: translate(-50%, -50%) scale(1);
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+body header form .filter-three label {
+  margin-left: 1rem;
+  font-weight: 700;
+}
+
+body header form button {
+  height: 65%;
+  width: 9rem;
+  background: #5964e0;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+body header form button:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+/*# sourceMappingURL=styles.css.map */
