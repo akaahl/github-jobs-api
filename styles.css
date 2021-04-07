@@ -262,4 +262,68 @@ body header form button:active {
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
 }
+
+body main {
+  width: 80%;
+  display: block;
+  margin: 8rem auto 0 auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[3];
+      grid-template-columns: repeat(3, auto);
+  grid-gap: 3rem;
+}
+
+body main section {
+  background: #fff;
+  border-radius: 10px;
+  position: relative;
+  padding: 2rem;
+  cursor: pointer;
+  -webkit-box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1);
+          box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+body main section .img-container {
+  margin: -3.5rem 0 1rem;
+  border-radius: 10px;
+}
+
+body main section .img-container img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+}
+
+body main section .job-details {
+  color: #6e8098;
+  font-weight: 500;
+}
+
+body main section .job-title {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+body main section .company-name {
+  margin-top: 10px;
+  color: #6e8098;
+  font-weight: 500;
+}
+
+body main section .company-location {
+  margin-top: 20px;
+  color: #5964e0;
+  font-weight: 500;
+}
+
+body main section:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  border: 2px solid #5964e0;
+  z-index: 10;
+}
 /*# sourceMappingURL=styles.css.map */

@@ -199,4 +199,62 @@ body {
       }
     }
   }
+
+  main {
+    width: 80%;
+    display: block;
+    margin: 8rem auto 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 3rem;
+
+    section {
+      background: $white;
+      border-radius: 10px;
+      position: relative;
+      padding: 2rem;
+      cursor: pointer;
+      box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1);
+      transition: all 0.1s linear;
+
+      .img-container {
+        margin: -3.5rem 0 1rem;
+        border-radius: 10px;
+
+        img {
+          object-fit: cover;
+          border-radius: 10px;
+        }
+      }
+
+      .job-details {
+        color: $dark-grey;
+        font-weight: 500;
+      }
+
+      .job-title {
+        margin-top: 10px;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .company-name {
+        margin-top: 10px;
+        color: $dark-grey;
+        font-weight: 500;
+      }
+
+      .company-location {
+        margin-top: 20px;
+        color: $violet;
+        font-weight: 500;
+      }
+    }
+
+    section:hover {
+      transform: scale(1.05);
+      border: 2px solid $violet;
+      z-index: 10;
+    }
+  }
 }
