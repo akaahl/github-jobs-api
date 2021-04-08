@@ -1,3 +1,73 @@
+html[data-theme='dark'] body {
+  background: #1c1427;
+}
+
+html[data-theme='dark'] header .header-container .mode-container input {
+  background: #2b2e4a;
+}
+
+html[data-theme='dark'] header .header-container .mode-container input::after {
+  background: #f3f4ed;
+  left: 30px;
+}
+
+html[data-theme='dark'] header form {
+  background: #2b2e4a;
+  -webkit-box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.1);
+          box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme='dark'] header form .filter input[type='text'] {
+  background: #2b2e4a;
+  color: #fff;
+  caret-color: #fff;
+}
+
+html[data-theme='dark'] header form .filter input[type='text']::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+html[data-theme='dark'] header form .filter input[type='text']:-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+html[data-theme='dark'] header form .filter input[type='text']::-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+html[data-theme='dark'] header form .filter input[type='text']::placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+html[data-theme='dark'] header form .filter-checkbox input[type='checkbox']::after {
+  -webkit-transform: translate(-50%, -50%) scale(1.7);
+          transform: translate(-50%, -50%) scale(1.7);
+}
+
+html[data-theme='dark'] header form .filter-checkbox label {
+  color: #fff;
+}
+
+html[data-theme='dark'] main section {
+  background: #2b2e4a;
+  -webkit-box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.1);
+          box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme='dark'] main section .job-details,
+html[data-theme='dark'] main section .company-name {
+  color: #fff;
+  opacity: 0.8;
+}
+
+html[data-theme='dark'] main section .job-title {
+  color: #fff;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +79,9 @@ body {
   min-height: 100vh;
   width: 100vw;
   background: #f3f4ed;
-  font-family: "Ubuntu", sans-serif;
+  font-family: sans-serif;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 body header {
@@ -77,10 +149,11 @@ body header .header-container .mode-container input {
   background: #fff;
   border: none;
   border-radius: 4rem;
+  outline: none;
 }
 
 body header .header-container .mode-container input::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 3px;
@@ -89,7 +162,9 @@ body header .header-container .mode-container input::after {
   height: 1rem;
   width: 1rem;
   border-radius: 50%;
-  background-color: #5964e0;
+  background: #5964e0;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
 }
 
 body header form {
@@ -107,9 +182,11 @@ body header form {
   background: #fff;
   -webkit-box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1);
           box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-body header form .filter-one {
+body header form .filter {
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -122,68 +199,41 @@ body header form .filter-one {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-body header form .filter-one input[type="text"] {
+body header form .filter input[type='text'] {
   width: 70%;
   margin-left: 1rem;
   border: none;
   outline: none;
   padding: 10px 5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-body header form .filter-one input[type="text"]::-webkit-input-placeholder {
+body header form .filter input[type='text']::-webkit-input-placeholder {
   opacity: 0.5;
 }
 
-body header form .filter-one input[type="text"]:-ms-input-placeholder {
+body header form .filter input[type='text']:-ms-input-placeholder {
   opacity: 0.5;
 }
 
-body header form .filter-one input[type="text"]::-ms-input-placeholder {
+body header form .filter input[type='text']::-ms-input-placeholder {
   opacity: 0.5;
 }
 
-body header form .filter-one input[type="text"]::placeholder {
+body header form .filter input[type='text']::placeholder {
   opacity: 0.5;
 }
 
-body header form .filter-two {
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+body header form .one {
+  width: 40%;
+}
+
+body header form .two {
   width: 25%;
-  padding-left: 2rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-body header form .filter-two input[type="text"] {
-  width: 70%;
-  margin-left: 1rem;
-  border: none;
-  outline: none;
-  padding: 10px 5px;
-}
-
-body header form .filter-two input[type="text"]::-webkit-input-placeholder {
-  opacity: 0.5;
-}
-
-body header form .filter-two input[type="text"]:-ms-input-placeholder {
-  opacity: 0.5;
-}
-
-body header form .filter-two input[type="text"]::-ms-input-placeholder {
-  opacity: 0.5;
-}
-
-body header form .filter-two input[type="text"]::placeholder {
-  opacity: 0.5;
-}
-
-body header form .filter-three {
+body header form .filter-checkbox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -196,7 +246,7 @@ body header form .filter-three {
   padding-left: 2rem;
 }
 
-body header form .filter-three input[type="checkbox"] {
+body header form .filter-checkbox input[type='checkbox'] {
   position: relative;
   background: #9daec2;
   -webkit-appearance: none;
@@ -207,12 +257,10 @@ body header form .filter-three input[type="checkbox"] {
   border-radius: 5px;
   outline: none;
   cursor: pointer;
-  -webkit-transition: all 0s linear;
-  transition: all 0s linear;
 }
 
-body header form .filter-three input[type="checkbox"]::after {
-  content: "";
+body header form .filter-checkbox input[type='checkbox']::after {
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -229,11 +277,11 @@ body header form .filter-three input[type="checkbox"]::after {
   transition: all 0.2s linear;
 }
 
-body header form .filter-three input[type="checkbox"]:checked {
+body header form .filter-checkbox input[type='checkbox']:checked {
   background: #5964e0;
 }
 
-body header form .filter-three input[type="checkbox"]:checked::after {
+body header form .filter-checkbox input[type='checkbox']:checked::after {
   visibility: visible;
   -webkit-transform: translate(-50%, -50%) scale(1);
           transform: translate(-50%, -50%) scale(1);
@@ -241,7 +289,7 @@ body header form .filter-three input[type="checkbox"]:checked::after {
   transition: all 0.2s linear;
 }
 
-body header form .filter-three label {
+body header form .filter-checkbox label {
   margin-left: 1rem;
   font-weight: 700;
 }
@@ -272,9 +320,12 @@ body main {
   -ms-grid-columns: (auto)[3];
       grid-template-columns: repeat(3, auto);
   grid-gap: 3rem;
+  place-items: center;
 }
 
 body main section {
+  min-width: 300px;
+  min-height: 250px;
   background: #fff;
   border-radius: 10px;
   position: relative;
@@ -289,11 +340,16 @@ body main section {
 body main section .img-container {
   margin: -3.5rem 0 1rem;
   border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  background: #fff;
 }
 
 body main section .img-container img {
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
+  height: 100%;
+  width: 100%;
   border-radius: 10px;
 }
 
@@ -304,7 +360,7 @@ body main section .job-details {
 
 body main section .job-title {
   margin-top: 10px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
 
@@ -315,9 +371,9 @@ body main section .company-name {
 }
 
 body main section .company-location {
-  margin-top: 20px;
+  margin-top: 40px;
   color: #5964e0;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 body main section:hover {
@@ -325,5 +381,23 @@ body main section:hover {
           transform: scale(1.05);
   border: 2px solid #5964e0;
   z-index: 10;
+}
+
+body footer button {
+  display: block;
+  margin: 5rem auto;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  padding: 1rem 2rem;
+  background: #5964e0;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+body footer button:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
 }
 /*# sourceMappingURL=styles.css.map */

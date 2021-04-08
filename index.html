@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link
@@ -14,7 +14,6 @@
       href="/assets/favicon-32x32.png"
     />
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js" defer></script>
     <title>GitHub Jobs API</title>
   </head>
@@ -42,7 +41,7 @@
       </div>
 
       <form>
-        <div class="filter-one">
+        <div class="filter one">
           <img src="assets/desktop/icon-glass.svg" alt="glass icon" />
           <input
             type="text"
@@ -50,7 +49,7 @@
             autocomplete="off"
           />
         </div>
-        <div class="filter-two">
+        <div class="filter two">
           <img src="assets/desktop/icon-location.svg" alt="location icon" />
           <input
             type="text"
@@ -58,7 +57,7 @@
             autocomplete="off"
           />
         </div>
-        <div class="filter-three">
+        <div class="filter-checkbox">
           <input type="checkbox" name="fulltime-filter" />
           <label for="fulltime-filter">Full Time Only</label>
         </div>
@@ -67,7 +66,7 @@
     </header>
 
     <main class="main-container" id="main-container">
-      <section class="job-container">
+      <!-- <section class="job-container">
         <div class="img-container">
           <img src="assets/desktop/no-logo-min.jpg" alt="company logo">
         </div>
@@ -125,7 +124,11 @@
         <p class="job-title">Senior Software Engineer</p>
         <p class="company-name">So Digital Inc.</p>
         <p class="company-location">Remote, Seoul, Tokyo, Mountain View, Sans Francisco</p>
-      </section>
+      </section> -->
     </main>
+
+    <footer>
+      <button id="load-more">Load More</button>
+    </footer>
   </body>
 </html>
