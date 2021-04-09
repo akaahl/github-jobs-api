@@ -2,6 +2,10 @@ const html = document.documentElement;
 const modeBtns = document.querySelectorAll('.mode-btn');
 const lightAndDarkModeCheckbox = document.querySelector('.light-dark-checkbox');
 const mainContainer = document.getElementById('main-container');
+const formContainer = document.getElementById('form-container');
+const searchByTitle = document.getElementById('search-by-title');
+const searchByLocation = document.getElementById('search-by-location');
+const fullTimeCheckBox = document.getElementById('fulltime-checkbox');
 
 (function () {
   const currentTheme = localStorage.getItem('color-mode');
@@ -72,3 +76,25 @@ async function getJobsData(url) {
 }
 
 getJobsData(apiUrl);
+
+function searchJobs(e) {
+  e.preventDefault();
+
+  mainContainer.innerHTML = '';
+
+  const termByTitle = searchByTile.value;
+  const termByLocation = searchByLocation.value;
+
+  async function getJobInfo(apiUrl) {
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+
+    if (termByTitle.trim()) {
+      mainContainer.innerHTML = `
+        
+      `;
+    }
+  }
+}
+
+formContainer.addEventListener('submit', searchJobs);

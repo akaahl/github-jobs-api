@@ -40,13 +40,14 @@
         </div>
       </div>
 
-      <form>
+      <form id="form-container">
         <div class="filter one">
           <img src="assets/desktop/icon-glass.svg" alt="glass icon" />
           <input
             type="text"
             placeholder="Filter by title, companies, expertise..."
             autocomplete="off"
+            id="search-by-title"
           />
         </div>
         <div class="filter two">
@@ -55,77 +56,22 @@
             type="text"
             placeholder="Filter by location..."
             autocomplete="off"
+            id="search-by-location"
           />
         </div>
         <div class="filter-checkbox">
-          <input type="checkbox" name="fulltime-filter" />
+          <input
+            type="checkbox"
+            name="fulltime-filter"
+            id="fulltime-checkbox"
+          />
           <label for="fulltime-filter">Full Time Only</label>
         </div>
         <button>Search</button>
       </form>
     </header>
 
-    <main class="main-container" id="main-container">
-      <!-- <section class="job-container">
-        <div class="img-container">
-          <img src="assets/desktop/no-logo-min.jpg" alt="company logo">
-        </div>
-        <p class="job-details">5h ago &#183 Full Time</p>
-        <p class="job-title">Senior Software Engineer</p>
-        <p class="company-name">So Digital Inc.</p>
-        <p class="company-location">Remote, Seoul, Tokyo, Mountain View, Sans Francisco</p>
-      </section>
-
-      <section class="job-container">
-        <div class="img-container">
-          <img src="assets/desktop/no-logo-min.jpg" alt="company logo">
-        </div>
-        <p class="job-details">5h ago &#183 Full Time</p>
-        <p class="job-title">Senior Software Engineer</p>
-        <p class="company-name">So Digital Inc.</p>
-        <p class="company-location">Remote, Seoul, Tokyo, Mountain View, Sans Francisco</p>
-      </section>
-
-      <section class="job-container">
-        <div class="img-container">
-          <img src="assets/desktop/no-logo-min.jpg" alt="company logo">
-        </div>
-        <p class="job-details">5h ago &#183 Full Time</p>
-        <p class="job-title">Senior Software Engineer</p>
-        <p class="company-name">So Digital Inc.</p>
-        <p class="company-location">Remote, Seoul, Tokyo, Mountain View, Sans Francisco</p>
-      </section>
-
-      <section class="job-container">
-        <div class="img-container">
-          <img src="assets/desktop/no-logo-min.jpg" alt="company logo">
-        </div>
-        <p class="job-details">5h ago &#183 Full Time</p>
-        <p class="job-title">Senior Software Engineer</p>
-        <p class="company-name">So Digital Inc.</p>
-        <p class="company-location">Remote, Seoul, Tokyo, Mountain View, Sans Francisco</p>
-      </section>
-
-      <section class="job-container">
-        <div class="img-container">
-          <img src="assets/desktop/no-logo-min.jpg" alt="company logo">
-        </div>
-        <p class="job-details">5h ago &#183 Full Time</p>
-        <p class="job-title">Senior Software Engineer</p>
-        <p class="company-name">So Digital Inc.</p>
-        <p class="company-location">Remote, Seoul, Tokyo, Mountain View, Sans Francisco</p>
-      </section>
-
-      <section class="job-container">
-        <div class="img-container">
-          <img src="assets/desktop/no-logo-min.jpg" alt="company logo">
-        </div>
-        <p class="job-details">5h ago &#183 Full Time</p>
-        <p class="job-title">Senior Software Engineer</p>
-        <p class="company-name">So Digital Inc.</p>
-        <p class="company-location">Remote, Seoul, Tokyo, Mountain View, Sans Francisco</p>
-      </section> -->
-    </main>
+    <main class="main-container" id="main-container"></main>
 
     <footer>
       <button id="load-more">Load More</button>
