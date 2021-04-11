@@ -1,4 +1,5 @@
 const html = document.documentElement;
+const homePageBtn = document.getElementById('homepage-logo-btn');
 const modeBtns = document.querySelectorAll('.mode-btn');
 const lightAndDarkModeCheckbox = document.querySelector('.light-dark-checkbox');
 const mainContainer = document.getElementById('main-container');
@@ -27,19 +28,40 @@ modeBtns.forEach(button => {
   });
 });
 
+let searchInfoArray;
 let pagination = 1;
-let apiUrl = `https://jobs.github.com/positions.json?page=${pagination}`;
+let apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${pagination}`;
+
+function checkFullTime(checkbox) {
+  return checkbox.checked ? true : false;
+}
+
+homePageBtn.addEventListener('click', () => {
+  mainContainer.innerHTML = ``;
+});
 
 loadMoreBtn.addEventListener('click', () => {
-  pagination += 1;
-  getJobsData(apiUrl);
-  console.log(pagination);
-  console.log(apiUrl);
+  if (loadMoreBtn.classList.contains('search-active')) {
+    apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination += 1)}&description=${
+      searchInfoArray[0]
+    }&location=${searchInfoArray[1]}&full_time=${checkFullTime(
+      fullTimeCheckBox
+    )}`;
+    getJobsData(apiUrl);
+  } else {
+    apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination += 1)}`;
+    getJobsData(apiUrl);
+  }
 });
 
 async function getJobsData(url) {
   const res = await fetch(url);
   const data = await res.json();
+
+  initialUpdateDOM(data);
+}
+
+function initialUpdateDOM(data) {
   const jobData = [...data];
 
   jobData.map(data => {
@@ -52,44 +74,26 @@ async function getJobsData(url) {
       location: jobLocation,
     } = data;
 
-    function convertStringToMonthNumber(str) {
-      switch (str) {
-        case 'Jan':
-          return (str = 0);
-          break;
-        case 'Feb':
-          return (str = 1);
-          break;
-        case 'Mar':
-          return (str = 2);
-          break;
-        case 'Apr':
-          return (str = 3);
-          break;
-        case 'May':
-          return (str = 4);
-          break;
-        case 'Jun':
-          return (str = 5);
-          break;
-        case 'Jul':
-          return (str = 6);
-          break;
-        case 'Aug':
-          return (str = 7);
-          break;
-        case 'Sep':
-          return (str = 8);
-          break;
-        case 'Oct':
-          return (str = 9);
-          break;
-        case 'Nov':
-          return (str = 10);
-          break;
-        case 'Dec':
-          return (str = 11);
-          break;
+    const monthsArray = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+
+    function convertStringToMonthNumber(arr, str) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] == str) {
+          return i;
+        }
       }
     }
 
@@ -97,7 +101,10 @@ async function getJobsData(url) {
       const currentMonth = new Date().getMonth();
       const currentDate = new Date().getDate();
       const currentHours = new Date().getHours();
-      let jobMonth = convertStringToMonthNumber(date.split(' ')[1]);
+      let jobMonth = convertStringToMonthNumber(
+        monthsArray,
+        date.split(' ')[1]
+      );
       const jobDate = +date.split(' ')[2];
       const jobHour = +date.split(' ')[3].split(':')[0];
 
@@ -106,6 +113,7 @@ async function getJobsData(url) {
       }
 
       if (currentDate == jobDate) {
+        // Fix this
         return currentHours - jobHour + 'H';
       }
 
@@ -137,25 +145,24 @@ function searchJobs(e) {
   e.preventDefault();
 
   mainContainer.innerHTML = '';
+  loadMoreBtn.classList.add('search-active');
 
   const termByTitle = searchByTitle.value.trim();
   const termByLocation = searchByLocation.value.trim();
 
-  function checkField(field) {
-    return !field ? '' : field;
-  }
+  searchInfoArray = [termByTitle, termByLocation];
 
   function checkFullTime(checkbox) {
     return checkbox.checked ? true : false;
   }
 
-  apiUrl = `https://jobs.github.com/positions.json?page=${pagination}&description=${checkField(
-    termByTitle
-  )}&location=${checkField(termByLocation)}&full_time=true}`;
+  apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination = 1)}&description=${
+    searchInfoArray[0]
+  }&location=${searchInfoArray[1]}&full_time=${checkFullTime(
+    fullTimeCheckBox
+  )}}`;
 
   getJobsData(apiUrl);
-
-  console.log(apiUrl);
 }
 
 formContainer.addEventListener('submit', searchJobs);

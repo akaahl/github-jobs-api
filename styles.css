@@ -118,6 +118,10 @@ body header .header-container {
           justify-content: space-between;
 }
 
+body header .header-container img {
+  cursor: pointer;
+}
+
 body header .header-container .mode-container {
   display: -webkit-box;
   display: -ms-flexbox;
