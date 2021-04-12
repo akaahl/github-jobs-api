@@ -455,5 +455,54 @@ body {
         }
       }
     }
+
+    .apply-section {
+      padding: 2.5rem 2rem;
+      margin-top: 2rem;
+      background: url(assets/desktop/bg-pattern-detail-footer.svg);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: center;
+
+      h4 {
+        color: $white;
+      }
+
+      p {
+        color: rgba(white, 0.7);
+        line-height: 1.5rem;
+        margin: 2rem 0 2rem 0;
+      }
+
+      a {
+        color: $white;
+        margin-bottom: 10px;
+      }
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 5rem 0 3rem;
+
+      div {
+        p {
+          color: $dark-grey;
+          margin-top: 10px;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: $white;
+        background: $violet;
+        padding: 1rem;
+        width: 19%;
+        text-align: center;
+        border-radius: 5px;
+        font-weight: 700;
+      }
+    }
   }
 }
