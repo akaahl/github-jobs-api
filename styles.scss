@@ -90,7 +90,15 @@ body {
   transition: all 0.3s ease-in-out;
   //   overflow-x: hidden;
 
-  header {
+  form.hide,
+  main.hide,
+  footer.hide {
+    transform: translateX(-150%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .header {
     width: 100%;
     height: 10rem;
     position: relative;
@@ -272,6 +280,7 @@ body {
     grid-template-columns: repeat(3, auto);
     grid-gap: 3rem;
     place-items: center;
+    transition: all 0.3s ease-in;
 
     section {
       min-width: 300px;
@@ -347,6 +356,104 @@ body {
 
     button:active {
       transform: scale(0.95);
+    }
+  }
+
+  aside {
+    width: 50%;
+    margin-top: 3rem;
+    display: block;
+    // height: 100vh;
+    position: relative;
+
+    header {
+      height: 100px;
+      background: $white;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      img {
+        border-top-left-radius: 5px;
+        height: 100%;
+        width: 100px;
+        object-fit: contain;
+      }
+
+      .company-details {
+        margin-left: 2rem;
+
+        p {
+          margin-top: 10px;
+          color: $dark-grey;
+        }
+      }
+
+      button {
+        position: absolute;
+        right: 5%;
+        border: none;
+        outline: none;
+        padding: 1rem;
+        border-radius: 5px;
+        background: rgba(147, 155, 244, 0.2);
+        color: $violet;
+        font-weight: 700;
+        cursor: pointer;
+      }
+    }
+
+    section {
+      background: $white;
+      margin-top: 2rem;
+      padding: 4rem 2rem;
+      border-radius: 5px;
+
+      .job-posting-details {
+        position: relative;
+
+        p {
+          color: $dark-grey;
+        }
+
+        h2 {
+          margin-top: 10px;
+        }
+
+        .job-location {
+          color: $violet;
+          font-weight: 700;
+          margin-top: 10px;
+        }
+
+        button {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          border: none;
+          outline: none;
+          width: 19%;
+          padding: 1rem;
+          border-radius: 5px;
+          font-weight: 700;
+          background: $violet;
+          color: $white;
+          cursor: pointer;
+        }
+      }
+
+      .job-description {
+        margin-top: 2rem;
+
+        p {
+          color: $dark-grey;
+          margin-top: 20px;
+          line-height: 1.5rem;
+        }
+      }
     }
   }
 }

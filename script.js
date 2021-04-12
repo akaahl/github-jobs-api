@@ -1,13 +1,18 @@
 const html = document.documentElement;
+const body = document.getElementsByTagName('body')[0];
 const homePageBtn = document.getElementById('homepage-logo-btn');
 const modeBtns = document.querySelectorAll('.mode-btn');
+const header = document.getElementById('header');
 const lightAndDarkModeCheckbox = document.querySelector('.light-dark-checkbox');
 const mainContainer = document.getElementById('main-container');
 const formContainer = document.getElementById('form-container');
 const searchByTitle = document.getElementById('search-by-title');
 const searchByLocation = document.getElementById('search-by-location');
 const fullTimeCheckBox = document.getElementById('fulltime-checkbox');
+const footer = document.getElementById('footer');
 const loadMoreBtn = document.getElementById('load-more');
+let searchInfoArray, apiUrl;
+let pagination = 1;
 
 (function () {
   const currentTheme = localStorage.getItem('color-mode');
@@ -17,20 +22,20 @@ const loadMoreBtn = document.getElementById('load-more');
 
 modeBtns.forEach(button => {
   button.addEventListener('click', () => {
-    if (button.classList.contains('light')) {
-      html.setAttribute('data-theme', 'light');
-      localStorage.setItem('color-mode', 'light');
-    }
-    if (button.classList.contains('dark')) {
-      html.setAttribute('data-theme', 'dark');
-      localStorage.setItem('color-mode', 'dark');
+    switch (true) {
+      case button.classList.contains('light'):
+        html.setAttribute('data-theme', 'light');
+        localStorage.setItem('color-mode', 'light');
+        break;
+      case button.classList.contains('dark'):
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('color-mode', 'dark');
+        break;
     }
   });
 });
 
-let searchInfoArray;
-let pagination = 1;
-let apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${pagination}`;
+apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${pagination}`;
 
 function checkFullTime(checkbox) {
   return checkbox.checked ? true : false;
@@ -38,6 +43,8 @@ function checkFullTime(checkbox) {
 
 homePageBtn.addEventListener('click', () => {
   mainContainer.innerHTML = ``;
+  apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${pagination}`;
+  getJobsData(apiUrl);
 });
 
 loadMoreBtn.addEventListener('click', () => {
@@ -48,7 +55,9 @@ loadMoreBtn.addEventListener('click', () => {
       fullTimeCheckBox
     )}`;
     getJobsData(apiUrl);
-  } else {
+  }
+
+  if (!loadMoreBtn.classList.contains('search-active')) {
     apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination += 1)}`;
     getJobsData(apiUrl);
   }
@@ -69,6 +78,7 @@ function initialUpdateDOM(data) {
       company: companyName,
       company_logo: companyLogo,
       created_at: date,
+      id: id,
       type: positionType,
       title: jobTitle,
       location: jobLocation,
@@ -123,6 +133,8 @@ function initialUpdateDOM(data) {
     }
 
     const sectionElement = document.createElement('section');
+    sectionElement.setAttribute('data-id', id);
+    sectionElement.addEventListener('click', showJobPosting);
     sectionElement.innerHTML = `
       <div class="img-container">
           <img src="${
@@ -152,10 +164,6 @@ function searchJobs(e) {
 
   searchInfoArray = [termByTitle, termByLocation];
 
-  function checkFullTime(checkbox) {
-    return checkbox.checked ? true : false;
-  }
-
   apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination = 1)}&description=${
     searchInfoArray[0]
   }&location=${searchInfoArray[1]}&full_time=${checkFullTime(
@@ -166,3 +174,41 @@ function searchJobs(e) {
 }
 
 formContainer.addEventListener('submit', searchJobs);
+
+function showJobPosting() {
+  const jobId = this.dataset.id;
+  singleApiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions/${jobId}.json`;
+  formContainer.classList.toggle('hide');
+  mainContainer.classList.toggle('hide');
+  footer.classList.toggle('hide');
+
+  const asideElement = document.createElement('aside');
+
+  setTimeout(() => {
+    mainContainer.style.display = 'none';
+    formContainer.style.display = 'none';
+    footer.style.display = 'none';
+  }, 500);
+
+  async function getSingleJobData(apiUrl) {
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+
+    console.log(data);
+
+    const {
+      company: companyName,
+      company_logo: companyLogo,
+      company_url: companyUrl,
+      created_at: date,
+      description: description,
+      how_to_apply: instruction,
+      location: location,
+      title: jobTitle,
+      type: positionType,
+      url: gitHubUrl,
+    } = data;
+  }
+  body.appendChild(asideElement);
+  getSingleJobData(singleApiUrl);
+}
