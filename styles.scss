@@ -74,6 +74,70 @@ html[data-theme='dark'] {
       }
     }
   }
+
+  aside {
+    header {
+      background: $dark-blue;
+
+      .company-details {
+        h3 {
+          color: $white;
+        }
+
+        p {
+          color: $gray;
+        }
+      }
+
+      a {
+        color: $white;
+      }
+    }
+
+    section {
+      background: $dark-blue;
+
+      .job-posting-details {
+        h2 {
+          color: $white;
+        }
+
+        .time-posted {
+          color: $gray;
+        }
+      }
+
+      .job-description {
+        p {
+          color: $gray;
+
+          a {
+            color: $white;
+          }
+        }
+
+        ol {
+          color: $gray;
+        }
+
+        ul {
+          li {
+            color: $gray;
+          }
+        }
+      }
+    }
+
+    footer {
+      h3 {
+        color: $white;
+      }
+
+      p {
+        color: $gray;
+      }
+    }
+  }
 }
 
 * {
@@ -88,7 +152,7 @@ body {
   background: $bg;
   font-family: sans-serif;
   transition: all 0.3s ease-in-out;
-  //   overflow-x: hidden;
+  overflow-x: hidden;
 
   form.hide,
   main.hide,
@@ -363,23 +427,34 @@ body {
     width: 50%;
     margin-top: 3rem;
     display: block;
-    // height: 100vh;
+    margin: -2rem auto 0;
     position: relative;
+    transform: translateX(200%);
+    visibility: hidden;
+    // display: none;
+    transition: all 0.6s ease-in-out;
 
     header {
       height: 100px;
       background: $white;
       border-top-right-radius: 5px;
-      border-top-left-radius: 5px;
+      border-top-left-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
 
-      img {
-        border-top-left-radius: 5px;
-        height: 100%;
+      .img-container {
+        height: 100px;
         width: 100px;
-        object-fit: contain;
+        background: $white;
+        border-top-left-radius: 5px;
+
+        img {
+          border-top-left-radius: 5px;
+          object-fit: contain;
+          height: 100%;
+          width: 100%;
+        }
       }
 
       .company-details {
@@ -391,17 +466,47 @@ body {
         }
       }
 
-      button {
+      a {
         position: absolute;
         right: 5%;
         border: none;
         outline: none;
+        font-size: 13.5px;
         padding: 1rem;
+        text-decoration: none;
         border-radius: 5px;
         background: rgba(147, 155, 244, 0.2);
         color: $violet;
         font-weight: 700;
         cursor: pointer;
+        transition: background 0.2s ease-in;
+
+        &:hover {
+          background: rgba(147, 155, 244, 0.5);
+        }
+      }
+
+      .aside-back-btn {
+        position: absolute;
+        top: 4rem;
+        left: -7rem;
+        outline: none;
+        border: none;
+        background: $violet;
+        padding: 0.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:active {
+          transform: scale(0.95);
+        }
+
+        img {
+          height: 30px;
+          width: 30px;
+          filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(192deg)
+            brightness(106%) contrast(102%);
+        }
       }
     }
 
@@ -428,30 +533,52 @@ body {
           margin-top: 10px;
         }
 
-        button {
+        a {
           position: absolute;
           right: 0;
           top: 50%;
           transform: translateY(-50%);
           border: none;
           outline: none;
-          width: 19%;
+          text-decoration: none;
+          color: $white;
+          background: $violet;
           padding: 1rem;
+          width: 20%;
+          text-align: center;
           border-radius: 5px;
           font-weight: 700;
-          background: $violet;
-          color: $white;
-          cursor: pointer;
         }
       }
 
       .job-description {
         margin-top: 2rem;
 
+        h2 {
+          color: $white;
+          margin-top: 2rem;
+        }
+
         p {
           color: $dark-grey;
           margin-top: 20px;
           line-height: 1.5rem;
+        }
+
+        ol {
+          color: $dark-grey;
+          padding: 1rem;
+        }
+
+        ul {
+          margin-top: 10px;
+          padding: 1rem;
+
+          li {
+            color: $dark-grey;
+            line-height: 1.5rem;
+            margin-top: 1rem;
+          }
         }
       }
     }
@@ -477,6 +604,7 @@ body {
       a {
         color: $white;
         margin-bottom: 10px;
+        text-overflow: ellipsis;
       }
     }
 
@@ -498,11 +626,19 @@ body {
         color: $white;
         background: $violet;
         padding: 1rem;
-        width: 19%;
+        width: 20%;
         text-align: center;
         border-radius: 5px;
         font-weight: 700;
       }
     }
+  }
+
+  aside.show {
+    transform: translateX(0%);
+    visibility: visible;
+    transition: all 0.6s ease-in-out;
+
+    // display: block;
   }
 }

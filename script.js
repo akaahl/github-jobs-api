@@ -11,7 +11,10 @@ const searchByLocation = document.getElementById('search-by-location');
 const fullTimeCheckBox = document.getElementById('fulltime-checkbox');
 const footer = document.getElementById('footer');
 const loadMoreBtn = document.getElementById('load-more');
-let searchInfoArray, apiUrl;
+const aside = document.getElementById('aside-element');
+const asideElement = document.createElement('aside');
+
+let searchInfoArray, apiUrl, asideBackBtn;
 let pagination = 1;
 
 (function () {
@@ -26,10 +29,12 @@ modeBtns.forEach(button => {
       case button.classList.contains('light'):
         html.setAttribute('data-theme', 'light');
         localStorage.setItem('color-mode', 'light');
+        // aside.classList.toggle('show');
         break;
       case button.classList.contains('dark'):
         html.setAttribute('data-theme', 'dark');
         localStorage.setItem('color-mode', 'dark');
+        // aside.classList.toggle('show');
         break;
     }
   });
@@ -41,11 +46,7 @@ function checkFullTime(checkbox) {
   return checkbox.checked ? true : false;
 }
 
-homePageBtn.addEventListener('click', () => {
-  mainContainer.innerHTML = ``;
-  apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${pagination}`;
-  getJobsData(apiUrl);
-});
+homePageBtn.addEventListener('click', () => window.location.reload());
 
 loadMoreBtn.addEventListener('click', () => {
   if (loadMoreBtn.classList.contains('search-active')) {
@@ -62,6 +63,53 @@ loadMoreBtn.addEventListener('click', () => {
     getJobsData(apiUrl);
   }
 });
+
+function getTimePosted(dateData) {
+  const monthsArray = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  function convertStringToMonthNumber(arr, str) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] == str) {
+        return i;
+      }
+    }
+  }
+
+  const currentMonth = new Date().getMonth();
+  const currentDate = new Date().getDate();
+  const currentHours = new Date().getHours();
+  let jobMonth = convertStringToMonthNumber(
+    monthsArray,
+    dateData.split(' ')[1]
+  );
+  const jobDate = +dateData.split(' ')[2];
+  const jobHour = +dateData.split(' ')[3].split(':')[0];
+
+  if (currentMonth !== jobMonth) {
+    return `More than 1M ago`;
+  }
+
+  if (currentDate == jobDate) {
+    // Fix this
+    return currentHours - jobHour + 'H';
+  }
+
+  if (currentDate - jobDate > 0) {
+    return currentDate - jobDate + 'D';
+  }
+}
 
 async function getJobsData(url) {
   const res = await fetch(url);
@@ -84,54 +132,6 @@ function initialUpdateDOM(data) {
       location: jobLocation,
     } = data;
 
-    const monthsArray = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-
-    function convertStringToMonthNumber(arr, str) {
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] == str) {
-          return i;
-        }
-      }
-    }
-
-    function getTimePosted() {
-      const currentMonth = new Date().getMonth();
-      const currentDate = new Date().getDate();
-      const currentHours = new Date().getHours();
-      let jobMonth = convertStringToMonthNumber(
-        monthsArray,
-        date.split(' ')[1]
-      );
-      const jobDate = +date.split(' ')[2];
-      const jobHour = +date.split(' ')[3].split(':')[0];
-
-      if (currentMonth !== jobMonth) {
-        return `More than 1M ago`;
-      }
-
-      if (currentDate == jobDate) {
-        // Fix this
-        return currentHours - jobHour + 'H';
-      }
-
-      if (currentDate - jobDate > 0) {
-        return currentDate - jobDate + 'D';
-      }
-    }
-
     const sectionElement = document.createElement('section');
     sectionElement.setAttribute('data-id', id);
     sectionElement.addEventListener('click', showJobPosting);
@@ -141,7 +141,9 @@ function initialUpdateDOM(data) {
             companyLogo == null ? 'assets/desktop/no-logo-min.jpg' : companyLogo
           }" alt="company logo">
         </div>
-        <p class="job-details">${getTimePosted()} ago &#183 ${positionType}</p>
+        <p class="job-details">${getTimePosted(
+          date
+        )} ago &#183 ${positionType}</p>
         <p class="job-title">${jobTitle}</p>
         <p class="company-name">${companyName}</p>
         <p class="company-location">${jobLocation}</p>
@@ -176,19 +178,12 @@ function searchJobs(e) {
 formContainer.addEventListener('submit', searchJobs);
 
 function showJobPosting() {
+  window.scrollTo(0, 0);
   const jobId = this.dataset.id;
   singleApiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions/${jobId}.json`;
   formContainer.classList.toggle('hide');
   mainContainer.classList.toggle('hide');
   footer.classList.toggle('hide');
-
-  const asideElement = document.createElement('aside');
-
-  setTimeout(() => {
-    mainContainer.style.display = 'none';
-    formContainer.style.display = 'none';
-    footer.style.display = 'none';
-  }, 500);
 
   async function getSingleJobData(apiUrl) {
     const res = await fetch(apiUrl);
@@ -208,7 +203,71 @@ function showJobPosting() {
       type: positionType,
       url: gitHubUrl,
     } = data;
+
+    asideElement.innerHTML = `
+      <header>
+        <div class="img-container">
+          <img src="${
+            !companyLogo ? 'assets/desktop/no-logo-min.jpg' : companyLogo
+          }" alt="logo-img">
+        </div>
+        <div class="company-details">
+          <h3>${companyName}</h3>
+          <p>${!companyUrl ? '' : companyUrl}</p>
+        </div>
+        <a href="${!companyUrl ? '#' : companyUrl}">Company Site</a>
+        <button id="aside-back-btn" class="aside-back-btn">
+          <img src="assets/desktop/arrow-left-svgrepo-com.svg" alt="back button" >
+        </button>
+      </header>
+
+      <section class="job-posting-content">
+        <div class="job-posting-details">
+          <p class="time-posted">${getTimePosted(
+            date
+          )} ago &#183 ${positionType}</p>
+          <h2>${jobTitle}</h2>
+          <p class="job-location">${location}</p>
+          <a href="#">Apply Now</a>
+        </div>
+
+        <div class="job-description">
+          ${description}
+        </div>
+      </section>
+
+      <div class="apply-section">
+        <h4>How to Apply</h4>
+        ${instruction}
+      </div>
+
+      <footer>
+        <div>
+          <h3>${jobTitle}</h3>
+          <p>${companyName}</p>
+        </div>
+
+        <a href="${!companyUrl ? '' : companyUrl}">Apply Now</a>
+      </footer>
+    `;
+
+    asideBackBtn = document.getElementById('aside-back-btn');
+    asideBackBtn.addEventListener('click', () => {
+      formContainer.classList.toggle('hide');
+      mainContainer.classList.toggle('hide');
+      footer.classList.toggle('hide');
+      asideElement.classList.toggle('show');
+      mainContainer.style.display = 'grid';
+      formContainer.style.display = 'flex';
+      footer.style.display = 'block';
+    });
   }
   body.appendChild(asideElement);
+  setTimeout(() => {
+    mainContainer.style.display = 'none';
+    formContainer.style.display = 'none';
+    footer.style.display = 'none';
+    asideElement.classList.toggle('show');
+  }, 500);
   getSingleJobData(singleApiUrl);
 }

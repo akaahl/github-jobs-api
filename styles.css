@@ -68,6 +68,58 @@ html[data-theme='dark'] main section .job-title {
   color: #fff;
 }
 
+html[data-theme='dark'] aside header {
+  background: #2b2e4a;
+}
+
+html[data-theme='dark'] aside header .company-details h3 {
+  color: #fff;
+}
+
+html[data-theme='dark'] aside header .company-details p {
+  color: #9daec2;
+}
+
+html[data-theme='dark'] aside header a {
+  color: #fff;
+}
+
+html[data-theme='dark'] aside section {
+  background: #2b2e4a;
+}
+
+html[data-theme='dark'] aside section .job-posting-details h2 {
+  color: #fff;
+}
+
+html[data-theme='dark'] aside section .job-posting-details .time-posted {
+  color: #9daec2;
+}
+
+html[data-theme='dark'] aside section .job-description p {
+  color: #9daec2;
+}
+
+html[data-theme='dark'] aside section .job-description p a {
+  color: #fff;
+}
+
+html[data-theme='dark'] aside section .job-description ol {
+  color: #9daec2;
+}
+
+html[data-theme='dark'] aside section .job-description ul li {
+  color: #9daec2;
+}
+
+html[data-theme='dark'] aside footer h3 {
+  color: #fff;
+}
+
+html[data-theme='dark'] aside footer p {
+  color: #9daec2;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -82,6 +134,7 @@ body {
   font-family: sans-serif;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  overflow-x: hidden;
 }
 
 body form.hide,
@@ -421,14 +474,20 @@ body aside {
   width: 50%;
   margin-top: 3rem;
   display: block;
+  margin: -2rem auto 0;
   position: relative;
+  -webkit-transform: translateX(200%);
+          transform: translateX(200%);
+  visibility: hidden;
+  -webkit-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
 }
 
 body aside header {
   height: 100px;
   background: #fff;
   border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+  border-top-left-radius: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -440,12 +499,19 @@ body aside header {
           justify-content: flex-start;
 }
 
-body aside header img {
-  border-top-left-radius: 5px;
-  height: 100%;
+body aside header .img-container {
+  height: 100px;
   width: 100px;
+  background: #fff;
+  border-top-left-radius: 5px;
+}
+
+body aside header .img-container img {
+  border-top-left-radius: 5px;
   -o-object-fit: contain;
      object-fit: contain;
+  height: 100%;
+  width: 100%;
 }
 
 body aside header .company-details {
@@ -457,17 +523,49 @@ body aside header .company-details p {
   color: #6e8098;
 }
 
-body aside header button {
+body aside header a {
   position: absolute;
   right: 5%;
   border: none;
   outline: none;
+  font-size: 13.5px;
   padding: 1rem;
+  text-decoration: none;
   border-radius: 5px;
   background: rgba(147, 155, 244, 0.2);
   color: #5964e0;
   font-weight: 700;
   cursor: pointer;
+  -webkit-transition: background 0.2s ease-in;
+  transition: background 0.2s ease-in;
+}
+
+body aside header a:hover {
+  background: rgba(147, 155, 244, 0.5);
+}
+
+body aside header .aside-back-btn {
+  position: absolute;
+  top: 4rem;
+  left: -7rem;
+  outline: none;
+  border: none;
+  background: #5964e0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+body aside header .aside-back-btn:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+body aside header .aside-back-btn img {
+  height: 30px;
+  width: 30px;
+  -webkit-filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(192deg) brightness(106%) contrast(102%);
+          filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(192deg) brightness(106%) contrast(102%);
 }
 
 body aside section {
@@ -495,7 +593,7 @@ body aside section .job-posting-details .job-location {
   margin-top: 10px;
 }
 
-body aside section .job-posting-details button {
+body aside section .job-posting-details a {
   position: absolute;
   right: 0;
   top: 50%;
@@ -503,16 +601,22 @@ body aside section .job-posting-details button {
           transform: translateY(-50%);
   border: none;
   outline: none;
-  width: 19%;
+  text-decoration: none;
+  color: #fff;
+  background: #5964e0;
   padding: 1rem;
+  width: 20%;
+  text-align: center;
   border-radius: 5px;
   font-weight: 700;
-  background: #5964e0;
-  color: #fff;
-  cursor: pointer;
 }
 
 body aside section .job-description {
+  margin-top: 2rem;
+}
+
+body aside section .job-description h2 {
+  color: #fff;
   margin-top: 2rem;
 }
 
@@ -520,6 +624,22 @@ body aside section .job-description p {
   color: #6e8098;
   margin-top: 20px;
   line-height: 1.5rem;
+}
+
+body aside section .job-description ol {
+  color: #6e8098;
+  padding: 1rem;
+}
+
+body aside section .job-description ul {
+  margin-top: 10px;
+  padding: 1rem;
+}
+
+body aside section .job-description ul li {
+  color: #6e8098;
+  line-height: 1.5rem;
+  margin-top: 1rem;
 }
 
 body aside .apply-section {
@@ -544,6 +664,7 @@ body aside .apply-section p {
 body aside .apply-section a {
   color: #fff;
   margin-bottom: 10px;
+  text-overflow: ellipsis;
 }
 
 body aside footer {
@@ -569,9 +690,17 @@ body aside footer a {
   color: #fff;
   background: #5964e0;
   padding: 1rem;
-  width: 19%;
+  width: 20%;
   text-align: center;
   border-radius: 5px;
   font-weight: 700;
+}
+
+body aside.show {
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+  visibility: visible;
+  -webkit-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
 }
 /*# sourceMappingURL=styles.css.map */
