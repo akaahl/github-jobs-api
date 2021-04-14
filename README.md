@@ -2,6 +2,8 @@
 
 This is a solution to the [GitHub Jobs API challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/github-jobs-api-93L-NL6rP). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
+Demo can be found [here](https://github-jobs-api-mu.vercel.app/)
+
 ### The challenge
 
 Users should be able to:

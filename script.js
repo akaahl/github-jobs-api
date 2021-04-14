@@ -19,7 +19,6 @@ let pagination = 1;
 // Set color theme on load
 function setColorTheme() {
   const currentTheme = localStorage.getItem('color-mode');
-
   if (currentTheme) html.setAttribute('data-theme', currentTheme);
 }
 
@@ -188,10 +187,12 @@ function showJobPosting() {
   header.scrollIntoView();
   const jobId = this.dataset.id;
   singleApiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions/${jobId}.json`;
+
   formContainer.classList.toggle('hide');
   mainContainer.classList.toggle('hide');
   footer.classList.toggle('hide');
   asideElement.style.display = 'block';
+
   setTimeout(() => {
     mainContainer.style.display = 'none';
     formContainer.style.display = 'none';
