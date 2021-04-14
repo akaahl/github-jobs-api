@@ -517,6 +517,11 @@ body aside header .company-details {
   margin-left: 2rem;
 }
 
+body aside header .company-details h3,
+body aside header .company-details p {
+  word-wrap: break-word;
+}
+
 body aside header .company-details p {
   margin-top: 10px;
   color: #6e8098;

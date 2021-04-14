@@ -460,6 +460,11 @@ body {
       .company-details {
         margin-left: 2rem;
 
+        h3,
+        p {
+          word-wrap: break-word;
+        }
+
         p {
           margin-top: 10px;
           color: $dark-grey;

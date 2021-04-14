@@ -13,16 +13,22 @@ const footer = document.getElementById('footer');
 const loadMoreBtn = document.getElementById('load-more');
 const aside = document.getElementById('aside-element');
 const asideElement = document.createElement('aside');
-
 let searchInfoArray, apiUrl, asideBackBtn;
 let pagination = 1;
 
-(function () {
+// Set color theme on load
+function setColorTheme() {
   const currentTheme = localStorage.getItem('color-mode');
 
   if (currentTheme) html.setAttribute('data-theme', currentTheme);
-})();
+}
 
+setColorTheme();
+
+// Reload homepage
+homePageBtn.addEventListener('click', () => window.location.reload());
+
+// Set event listeners for light/dark mode
 modeBtns.forEach(button => {
   button.addEventListener('click', () => {
     switch (true) {
@@ -40,29 +46,12 @@ modeBtns.forEach(button => {
   });
 });
 
-apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${pagination}`;
-
+// To be used in the apiUrl
 function checkFullTime(checkbox) {
   return checkbox.checked ? true : false;
 }
 
-homePageBtn.addEventListener('click', () => window.location.reload());
-
-loadMoreBtn.addEventListener('click', () => {
-  if (loadMoreBtn.classList.contains('search-active')) {
-    apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination += 1)}&description=${
-      searchInfoArray[0]
-    }&location=${searchInfoArray[1]}&full_time=${checkFullTime(
-      fullTimeCheckBox
-    )}`;
-    getJobsData(apiUrl);
-  }
-
-  if (!loadMoreBtn.classList.contains('search-active')) {
-    apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination += 1)}`;
-    getJobsData(apiUrl);
-  }
-});
+apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${pagination}`;
 
 function getTimePosted(dateData) {
   const monthsArray = [
@@ -79,6 +68,7 @@ function getTimePosted(dateData) {
     'Nov',
     'Dec',
   ];
+
   function convertStringToMonthNumber(arr, str) {
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] == str) {
@@ -102,7 +92,6 @@ function getTimePosted(dateData) {
   }
 
   if (currentDate == jobDate) {
-    // Fix this
     return currentHours - jobHour + 'H';
   }
 
@@ -111,6 +100,7 @@ function getTimePosted(dateData) {
   }
 }
 
+// Fetch data from the apiUrl
 async function getJobsData(url) {
   const res = await fetch(url);
   const data = await res.json();
@@ -118,6 +108,7 @@ async function getJobsData(url) {
   initialUpdateDOM(data);
 }
 
+// Update DOM during initial load
 function initialUpdateDOM(data) {
   const jobData = [...data];
 
@@ -155,15 +146,30 @@ function initialUpdateDOM(data) {
 
 getJobsData(apiUrl);
 
+// Load more job postings based on the new apiUrl
+loadMoreBtn.addEventListener('click', () => {
+  if (loadMoreBtn.classList.contains('search-active')) {
+    apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination += 1)}&description=${
+      searchInfoArray[0]
+    }&location=${searchInfoArray[1]}&full_time=${checkFullTime(
+      fullTimeCheckBox
+    )}`;
+    getJobsData(apiUrl);
+  }
+
+  if (!loadMoreBtn.classList.contains('search-active')) {
+    apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination += 1)}`;
+    getJobsData(apiUrl);
+  }
+});
+
+// Search for specific jobs and update them into the DOM
 function searchJobs(e) {
   e.preventDefault();
-
   mainContainer.innerHTML = '';
   loadMoreBtn.classList.add('search-active');
-
   const termByTitle = searchByTitle.value.trim();
   const termByLocation = searchByLocation.value.trim();
-
   searchInfoArray = [termByTitle, termByLocation];
 
   apiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions.json?page=${(pagination = 1)}&description=${
@@ -177,6 +183,7 @@ function searchJobs(e) {
 
 formContainer.addEventListener('submit', searchJobs);
 
+// Show job posting details when clicked
 function showJobPosting() {
   header.scrollIntoView();
   const jobId = this.dataset.id;
