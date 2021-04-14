@@ -178,18 +178,23 @@ function searchJobs(e) {
 formContainer.addEventListener('submit', searchJobs);
 
 function showJobPosting() {
-  window.scrollTo(0, 0);
+  header.scrollIntoView();
   const jobId = this.dataset.id;
   singleApiUrl = `https://pacific-taiga-98536.herokuapp.com/https://jobs.github.com/positions/${jobId}.json`;
   formContainer.classList.toggle('hide');
   mainContainer.classList.toggle('hide');
   footer.classList.toggle('hide');
+  asideElement.style.display = 'block';
+  setTimeout(() => {
+    mainContainer.style.display = 'none';
+    formContainer.style.display = 'none';
+    footer.style.display = 'none';
+    asideElement.classList.toggle('show');
+  }, 500);
 
   async function getSingleJobData(apiUrl) {
     const res = await fetch(apiUrl);
     const data = await res.json();
-
-    console.log(data);
 
     const {
       company: companyName,
@@ -253,21 +258,25 @@ function showJobPosting() {
 
     asideBackBtn = document.getElementById('aside-back-btn');
     asideBackBtn.addEventListener('click', () => {
-      formContainer.classList.toggle('hide');
-      mainContainer.classList.toggle('hide');
-      footer.classList.toggle('hide');
       asideElement.classList.toggle('show');
-      mainContainer.style.display = 'grid';
-      formContainer.style.display = 'flex';
-      footer.style.display = 'block';
+
+      setTimeout(() => {
+        mainContainer.style.display = 'grid';
+        formContainer.style.display = 'flex';
+        footer.style.display = 'block';
+      }, 500);
+
+      setTimeout(() => {
+        formContainer.classList.toggle('hide');
+        mainContainer.classList.toggle('hide');
+        footer.classList.toggle('hide');
+        asideElement.style.display = `none`;
+        document.querySelector(`[data-id='${jobId}']`).scrollIntoView();
+      }, 600);
     });
   }
+
   body.appendChild(asideElement);
-  setTimeout(() => {
-    mainContainer.style.display = 'none';
-    formContainer.style.display = 'none';
-    footer.style.display = 'none';
-    asideElement.classList.toggle('show');
-  }, 500);
+
   getSingleJobData(singleApiUrl);
 }
